@@ -57,6 +57,21 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
     }
   }
 
+  void _performModuloOperation() {
+    final amount = double.tryParse(_amountController.text);
+    if (amount != null) {
+      final result = amount %
+          2; // You can modify this to any number you want to use for the modulo operation
+      setState(() {
+        _result = result.toStringAsFixed(2);
+      });
+    } else {
+      setState(() {
+        _result = 'Invalid amount';
+      });
+    }
+  }
+
   void _clearFields() {
     setState(() {
       _amountController.clear();
@@ -119,6 +134,11 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
             ElevatedButton(
               onPressed: _convertCurrency,
               child: const Text('Convert'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _performModuloOperation,
+              child: const Text('Modulo'),
             ),
             const SizedBox(height: 20),
             Text(
